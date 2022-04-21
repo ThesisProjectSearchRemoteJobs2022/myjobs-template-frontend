@@ -3,7 +3,10 @@ import JobsList from "../components/JobsList";
 function Home() {
   return (
     <div>
-      <h1>This is home page.</h1>
+      {/* <div className="py-4 relative h-32 cyan">
+          
+        </div> */}
+        
       <JobsList />
     </div>
   )
