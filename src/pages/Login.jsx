@@ -1,7 +1,7 @@
 import React from "react";
 import { LockClosedIcon } from '@heroicons/react/solid'
 
-export default function Example() {
+function Login() {
   return (
     <>
       {/*
@@ -98,3 +98,4 @@ export default function Example() {
     </>
   )
 }
+export default Login
