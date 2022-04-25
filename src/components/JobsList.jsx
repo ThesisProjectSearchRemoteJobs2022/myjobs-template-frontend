@@ -47,10 +47,20 @@ const JobsList = () => {
       {/* <!-- image search box --> */}
       <div className="main">
           <div className="px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto">
+            
+      {/* <form className="flex flex-col md:flex-row w-3/4 md:w-full max-w-sm md:space-x-3 space-y-3 md:space-y-0 justify-center">
+          <div className=" relative ">
+              <input type="text" id="&quot;form-subscribe-Subscribe" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Email"/>
+              </div>
+              <button className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200" type="submit">
+                  Subscribe
+              </button>
+          </form> */}
+
+
           <div className="hero">
                   <div className="box pt-6">
                       <div className="box-wrapper">
-
                           <div className=" bg-white rounded flex items-center w-full p-3 shadow-sm border border-gray-200">
                           {/* stroke-linecap="round" stroke-linejoin="round" */}
                             <button onClick={()=>submit()} className="outline-none focus:outline-none"><svg className=" w-5 text-gray-600 h-5 cursor-pointer" fill="none"  strokeWidth="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>

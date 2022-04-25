@@ -6,7 +6,11 @@ import About from './pages/About';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
+import { actionType } from "./reducer/reducer";
+import { useStateValue } from "./reducer/StateProvider";
+
 function App() {
+  const [{cities, itinerarie}, dispatch]=useStateValue()
   return (
     <BrowserRouter>
     <div className="pt-20">

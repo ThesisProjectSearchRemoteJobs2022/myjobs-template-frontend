@@ -7,4 +7,5 @@
 
 
 export const BASE_URL= import.meta.env.VITE_APP_HOSTSCRAPINGJOBS
+export const BASE_URL_AUTH= import.meta.env.VITE_APP_AUTH_SERVICE
 // export const BASE_URL= "https://web-app-jobs-2022-api.herokuapp.com/api/v1/"

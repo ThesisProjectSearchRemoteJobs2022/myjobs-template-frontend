@@ -13,3 +13,4 @@ const useGetData = async (obj) => {
 };
 
 export default useGetData;
+
