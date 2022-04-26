@@ -190,8 +190,6 @@ const Login = () => {
             <div
               ref={errRef}
               className={errMsg ? "flex bg-red-100 rounded-lg p-4 mb-4 text-sm text-red-700" : "hidden"}
-
-            
               role="alert"
             >
               <svg
