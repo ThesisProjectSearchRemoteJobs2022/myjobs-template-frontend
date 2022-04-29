@@ -2,13 +2,15 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import usePostRegisterUser from "../hooks/usePostRegisterUser";
 import { Link, Redirect } from 'react-router-dom';
-
+import { useStateValue } from '../reducer/StateProvider';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 const MySwal = withReactContent(Swal)
 
 const Register = () => {
+  const [{ user }, dispatch] = useStateValue()
+  
   const userRef = useRef();
   const errRef = useRef();
 
@@ -69,7 +71,11 @@ const Register = () => {
       
       console.log(JSON.stringify(response));
       
-      
+      if(response.error){
+        
+        setErrMsg(response.error.message);
+        return
+      }
       if (response.data?.success === false) {
         console.log("FALSE user exists");
         let errorUserAlreadyExist = response.data?.response;
@@ -111,128 +117,130 @@ const Register = () => {
 
   return (
     <>
-    <div className="main">
-        <div className="px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto">
-    
-        <div className="md:grid md:grid-cols-3 md:gap-6">
-          <div className="md:col-span-1">
-            <div className="px-4 mt-5">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
-                Personal Information
-              </h3>
-              <p className="mt-1 text-sm text-gray-600">
-                Use a permanent address where you can receive mail.
-              </p>
-            </div>
-          </div>
-          <div className="mt-5 md:mt-0 md:col-span-2">
-            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-              {/* //region ALERTA  */}
-              <div className="px-4 sm:px-6">
-              <div
-                ref={errRef}
-                className={
-                  errMsg
-                    ? "flex bg-red-100 rounded-lg p-4 mb-4 text-sm text-red-700"
-                    : "hidden"
-                }
-                role="alert"
-              >
-                <svg
-                  className="w-5 h-5 inline mr-3"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <div>
-                  <span className="font-medium">Danger alert!</span> {errMsg}
+      {user ? (
+        <Redirect from="/login" to="/" />
+      ) : (
+        <div className="main">
+          <div className="px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto">
+            <div className="md:grid md:grid-cols-3 md:gap-6">
+              <div className="md:col-span-1">
+                <div className="px-4 mt-5">
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">
+                    Personal Information
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-600">
+                    Use a permanent address where you can receive mail.
+                  </p>
                 </div>
               </div>
-              </div>
-              {/* //endregion */}
-              <div className="shadow overflow-hidden sm:rounded-md">
-                <div className="px-4 py-5 bg-white sm:p-6">
-                  <div className="grid grid-cols-6 gap-6">
-                    <div className="col-span-6 sm:col-span-3">
-                      <label
-                        htmlFor="firstname"
-                        className="block text-sm font-medium text-gray-700"
+              <div className="mt-5 md:mt-0 md:col-span-2">
+                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+                  {/* //region ALERTA  */}
+                  <div className="px-4 sm:px-6">
+                    <div
+                      ref={errRef}
+                      className={
+                        errMsg
+                          ? "flex bg-red-100 rounded-lg p-4 mb-4 text-sm text-red-700"
+                          : "hidden"
+                      }
+                      role="alert"
+                    >
+                      <svg
+                        className="w-5 h-5 inline mr-3"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        First name
-                      </label>
-                      <input
-                        type="text"
-                        name="firstname"
-                        id="firstname"
-                        ref={userRef}
-                        autoComplete="off"
-                        onChange={(e) => setUser(e.target.value)}
-                        value={userS}
-                        required
-                        // autoComplete="given-name"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      />
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                      <div>
+                        <span className="font-medium">Alert!</span> {errMsg}
+                      </div>
                     </div>
+                  </div>
+                  {/* //endregion */}
+                  <div className="shadow overflow-hidden sm:rounded-md">
+                    <div className="px-4 py-5 bg-white sm:p-6">
+                      <div className="grid grid-cols-6 gap-6">
+                        <div className="col-span-6 sm:col-span-3">
+                          <label
+                            htmlFor="firstname"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            First name
+                          </label>
+                          <input
+                            type="text"
+                            name="firstname"
+                            id="firstname"
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={(e) => setUser(e.target.value)}
+                            value={userS}
+                            required
+                            // autoComplete="given-name"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          />
+                        </div>
 
-                    <div className="col-span-6 sm:col-span-3">
-                      <label
-                        htmlFor="lastname"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Last name
-                      </label>
-                      <input
-                        type="text"
-                        name="lastname"
-                        id="lastname"
-                        autoComplete="family-name"
-                        required
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      />
-                    </div>
+                        <div className="col-span-6 sm:col-span-3">
+                          <label
+                            htmlFor="lastname"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            Last name
+                          </label>
+                          <input
+                            type="text"
+                            name="lastname"
+                            id="lastname"
+                            autoComplete="family-name"
+                            required
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          />
+                        </div>
 
-                    <div className="col-span-6 sm:col-span-3">
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Email address
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        autoComplete="email"
-                        required
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      />
-                    </div>
+                        <div className="col-span-6 sm:col-span-3">
+                          <label
+                            htmlFor="email"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            Email address
+                          </label>
+                          <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            autoComplete="email"
+                            required
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          />
+                        </div>
 
-                    <div className="col-span-6 sm:col-span-3">
-                      <label
-                        htmlFor="password"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Password
-                      </label>
-                      <input
-                        type="password"
-                        name="passwod"
-                        id="passwod"
-                        required
-                        // fullWidth
+                        <div className="col-span-6 sm:col-span-3">
+                          <label
+                            htmlFor="password"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            Password
+                          </label>
+                          <input
+                            type="password"
+                            name="passwod"
+                            id="passwod"
+                            required
+                            // fullWidth
 
-                        label="Password"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      />
-                    </div>
-                    {/* <div className="col-span-6 sm:col-span-3">
+                            label="Password"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          />
+                        </div>
+                        {/* <div className="col-span-6 sm:col-span-3">
                       <label htmlFor="country" className="block text-sm font-medium text-gray-700">
                         Country
                       </label>
@@ -299,25 +307,26 @@ const Register = () => {
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div> */}
+                      </div>
+                    </div>
+                    <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                      <Link className=" py-2 px-4" to="/login">
+                        {"Already have an account? Sign in"}
+                      </Link>
+                      <button
+                        type="submit"
+                        className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      >
+                        Save
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                  <Link className=" py-2 px-4" to="/login">
-                    {"Already have an account? Sign in"}
-                  </Link>
-                  <button
-                    type="submit"
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Save
-                  </button>
-                </div>
+                </form>
               </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
-      </div>
+      )}
     </>
   );
 }

@@ -24,7 +24,9 @@ const Login = () => {
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
+  
     userRef.current.focus();
+    
   }, []);
 
   useEffect(() => {
@@ -116,8 +118,14 @@ const Login = () => {
       console.log("response:", response);
       
       console.log(JSON.stringify(response));
+      if(response.error){
+        setSuccess(false)
+        setErrMsg("Network Error");
+        return
+      }
       if (response.data?.success==false) {
         console.log('FALSE')
+        setSuccess(false)
         setErrMsg(response.data.error);
         return
       }
@@ -149,16 +157,20 @@ const Login = () => {
   };
 
   return (
+    
     <>
-      {success ? (
+     
+      {user ? (
+        
         <section>
           <h1>You are logged in!</h1>
+          
           <br />
           <p>
             {/* <a href="#">Go to Home</a> */}
 
             {/* <Redirect from='/' to='/' />  */}
-
+            <Redirect from='/login' to='/' /> 
             
             {/* <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
@@ -205,7 +217,7 @@ const Login = () => {
                 ></path>
               </svg>
               <div>
-                <span className="font-medium">Danger alert!</span> {errMsg}.
+                <span className="font-medium">Alert!</span> {errMsg}.
               </div>
             </div>
             {/* //endregion */}
@@ -216,10 +228,11 @@ const Login = () => {
 
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
-                  <label htmlFor="username">Username:</label>
+                  <label htmlFor="username">Email:</label>
                   <input
                     type="email"
                     id="username"
+                    placeholder="youremail@gmail.com"
                     ref={userRef}
                     autoComplete="off"
                     onChange={(e) => setUser(e.target.value)}
@@ -230,9 +243,10 @@ const Login = () => {
                   />
                 </div>
                 <div>
-                  {/* <label htmlFor="password">Password:</label> */}
+                  <label htmlFor="password">Password:</label>
                   <input
                     type="password"
+                    placeholder="password"
                     id="password"
                     onChange={(e) => setPwd(e.target.value)}
                     value={pwd}
@@ -266,7 +280,7 @@ const Login = () => {
                   </a>
                 </div>
 
-                <Link to="/register">{"Don't have an account? Sign Up"}</Link>
+                <Link to="/register">Don't have an account? Sign Up</Link>
               </div>
 
               <div>
