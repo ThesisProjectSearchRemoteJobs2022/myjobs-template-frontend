@@ -6,7 +6,6 @@ const useGetData = async (obj) => {
 		method: "GET",
 		url: BASE_URL + obj.url,
 	}).then(function (response) {
-		console.log(response)
 		let { data } = response;
 		return data;
 	});
