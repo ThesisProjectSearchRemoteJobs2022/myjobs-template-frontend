@@ -10,6 +10,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import {KeyIcon, MailIcon } from '@heroicons/react/outline';
 // import lista from "../data/information";
 // import lista from "../data/information";
+import toast, { Toaster } from 'react-hot-toast';
 
 const JobsList = () => {
   const [{ user }, dispatch] = useStateValue()
@@ -24,10 +25,10 @@ const JobsList = () => {
   const [open, setOpen] = useState(false)
   const [openDialog2, setOpenDialog2] = useState(false)
   
-  const getJobsList = (jobSearchArg = "desarrollador") => {
+  const getJobsList = async (jobSearchArg ) => {
     if (jobSearch != null) jobSearchArg = jobSearch;
     
-    useGetData({
+    await useGetData({
       url: `getJobs?trabajo=${jobSearchArg}`,
     }).then((data) => {
       console.log(data);
@@ -37,6 +38,7 @@ const JobsList = () => {
     }).catch(error=>{
       console.log("error",error.message)
     });
+
   };
 
   const handle = (e)=>{
@@ -54,7 +56,7 @@ const JobsList = () => {
   
   const confirmarSubscripcion = async (usuario)=>{
     try {
-      console.log(usuario)
+      // console.log("confirmarSubscripcion",usuario)
       const usuariObj  = usuario.user
       if(!usuariObj ){
         
@@ -68,69 +70,77 @@ const JobsList = () => {
     }
   
 
-    
-
-
-    
   }
+
+  const showHotToastMessage = (hasError,message) => {
+    if (hasError) {
+      toast.error(message)
+      return
+    }
+    toast(message,{
+      icon: '🔔',
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+      },
+    }
+
+    
+    )};
+
   const subcribirseNotificacionesEmail = async (usuario) => {
     // e.preventDefault();
     
     // console.log(user)
     try {
-      const usuariObj  = usuario.user
-      if(jobSearch==""){
-        console.log("Ingrese el empleo a buscar")
-        return
+      const usuariObj = usuario.user;
+      if (jobSearch == "") {
+        console.log("Ingrese el empleo a buscar");
+        return;
       }
-      if(!usuariObj ){
-        console.log("Primero inicie sesion")
+      if (!usuariObj) {
+        console.log("Primero inicie sesion");
         // return
       }
-      
-        const response = await useSubcribeTopicJob({
-          trabajo: jobSearch,
-          email: usuariObj.datosUser.email,
-        });
 
-      console.log("response:", response);
-      console.log("data> data: ",response.data)
-      console.log("stado: ",response.data.success)
-      console.log("message: ",response.data.message)
-
-      if(response.status!=200){
-        alert("Sin conexion")
-        return
-      }
-      
-      if(response.data.success==false){
-        alert("Mensaje: "+response.data.message)
+      const response = await useSubcribeTopicJob({
+        trabajo: jobSearch,
+        email: usuariObj.datosUser.email,
+      });
+      console.log("response useSubcribeTopicJob : ", response);
+      if(response.success==false ){
+        showHotToastMessage(true,response.errorMessage)
         return
       }
 
-      setOpen(false) //cerrar
+      if (response.status != 200) {
+        // alert("Sin conexion");
+        showHotToastMessage(true,"Sin conexion")
+        return
+      }
+
+      if (response.data.success == false) {
+        //alert("Mensaje: " + response.data.message);
+        // showHotToastMessage(true,response.errorMessage)
+        showHotToastMessage(true,response.data.message)
+        return
+      }
+
+      // console.log("data> data: ", response.data);
+      // console.log("stado: ", response.data.success);
+      // console.log("message: ", response.data.message);
+
+      showHotToastMessage(false,response.data.message);
+      setOpen(false); //cerrar
 
       // setOpenDialog2(false)
 
-      // await useSubcribeTopicJob({
-      //   trabajo: jobSearch,
-      //   email: usuariObj.datosUser.email,
-      // }).then((data) => {
-      //   console.log("data: ",data);
-      //   console.log("data> data: ",data.data);
-      
-      //   // setHasJobs(data.success);
-      //   setOpen(false)
-      //   // setOpenDialog2(false)
-      // }).catch(error=>{
-      //   console.log("error",error.message)
-      // });
 
-      
-    console.log("JSON USUARI RECIBIDO", usuario)
-    console.log("busqueda CLik", jobSearch)
+      console.log("JSON USUARI RECIBIDO", usuario);
+      console.log("busqueda CLik", jobSearch);
       console.log(`Hola ${usuariObj.datosUser.firstname}. Se subscribira a recibir notificaciones de [${jobSearch}]
-      a su corre ${usuariObj.datosUser.email} \n Confirmar [SI]`)
+      a su corre ${usuariObj.datosUser.email} \n Confirmar [SI]`);
     } catch (error) {
       console.log("error",error.message)
     }
@@ -158,6 +168,11 @@ const JobsList = () => {
                     Subscribe
                 </button>
           </form> */}
+
+          <Toaster
+            position="bottom-center"
+            reverseOrder={true}
+          />
 
           <Transition.Root show={openDialog2} as={Fragment}>
             <Dialog
@@ -280,14 +295,15 @@ const JobsList = () => {
                             as="h3"
                             className="text-lg leading-6 font-medium text-gray-900"
                           >
-                            Subscripcion a Correos
+                              Subcripcion a recibir correos electronico
                           </Dialog.Title>
                           <div className="mt-2 flex ">
                             <p className="text-sm text-gray-500 w-full">
-                              Seguro que quiere Recibir Correos?
+                              
+                              Recibira notificaciones de
                             </p>
                           </div>
-                          <p className="text-sm font-semibold"> {jobSearch}</p>
+                          <p className="text-sm font-semibold">{jobSearch}</p>
                         </div>
                       </div>
                     </div>

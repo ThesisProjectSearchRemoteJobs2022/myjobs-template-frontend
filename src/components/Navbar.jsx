@@ -42,7 +42,7 @@ const validLocalToken =()=>{
     //     }
     //   });
     useValidarToken(token).then((response) => {
-      console.log("response: ", response);
+      console.log("response Welcome Back 2: ", response);
       if (user.data.success) {
         dispatch({
           type: actionType.USER,
@@ -110,7 +110,8 @@ function Navbar() {
     if (localStorage.getItem("token") !== null) {
       const token = localStorage.getItem("token");
       useValidarToken(token).then((response) => {
-        console.log("response: ", response);
+        console.log("response Welcome Back: ", response);
+        //TODO WELCOM BACK USER signInToken
         if (response.data.success) {
           dispatch({
             type: actionType.USER,

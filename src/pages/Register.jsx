@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { useStateValue } from '../reducer/StateProvider';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-
+import toast, { Toaster } from 'react-hot-toast';
 const MySwal = withReactContent(Swal)
 
 const Register = () => {
@@ -29,25 +29,47 @@ const Register = () => {
   }, [userS, pwd]);
 
   
+  const showHotToastMessage = (hasError,message) => {
+    if (hasError) {
+      toast.error(message)
+      return
+    }
+    toast(message,{
+      icon: '🔔',
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+      },
+    }
+
+    
+    )};
+
   function displayMessages(data) {
+    console.log("displayMessages : ",data)
     if (data.success === "falseVAL") {
       // let errorDetalles = data.response.error.details;
       let errorDetalles = data.response
       
       
     } else if (data.success === true) {
+
+
       //TODO VER LAS ALERTAS NO FUNCIONA EL DISEÑOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-      MySwal.fire({
-        title: <p>Good</p>,
-        footer: 'success',
-        didOpen: () => {
-          // `MySwal` is a subclass of `Swal`
-          //   with all the same instance & static methods
-          MySwal.clickConfirm()
-        }
-      }).then(() => {
-        return MySwal.fire(<p>Registered user with SingIn!, <br /> We have sent an e-mail to verify your e-mail address</p>)
-      })
+      // MySwal.fire({
+      //   title: <p>Good</p>,
+      //   footer: 'success',
+      //   didOpen: () => {
+      //     // `MySwal` is a subclass of `Swal`
+      //     //   with all the same instance & static methods
+      //     MySwal.clickConfirm()
+      //   }
+      // }).then(() => {
+      //   return MySwal.fire(<p>Registered user with SingIn!, <br /> We have sent an e-mail to verify your e-mail address</p>)
+      // })
+
+      showHotToastMessage(false,data.response)
     }
   }
 
@@ -121,6 +143,11 @@ const Register = () => {
         <Redirect from="/login" to="/" />
       ) : (
         <div className="main">
+            <Toaster
+            position="bottom-center"
+            reverseOrder={true}
+          />
+
           <div className="px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto">
             <div className="md:grid md:grid-cols-3 md:gap-6">
               <div className="md:col-span-1">
