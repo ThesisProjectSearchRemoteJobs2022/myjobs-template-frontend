@@ -187,7 +187,7 @@ const Login = () => {
                 alt="Workflow"
               />
               <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                Sign in to your account
+              Iniciar sesión
               </h2>
               {/* <p className="mt-2 text-center text-sm text-gray-600">
               Or{' '}
@@ -228,7 +228,7 @@ const Login = () => {
 
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
-                  <label htmlFor="username">Email:</label>
+                  <label htmlFor="username">Correo electrónico:</label>
                   <input
                     type="email"
                     id="username"
@@ -243,7 +243,7 @@ const Login = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="password">Password:</label>
+                  <label htmlFor="password">Contraseña:</label>
                   <input
                     type="password"
                     placeholder="password"
@@ -276,11 +276,11 @@ const Login = () => {
                     href="#"
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
-                    Forgot your password?
+                    ¿Olvidaste tu contraseña?
                   </a>
                 </div>
 
-                <Link to="/register">Don't have an account? Sign Up</Link>
+                <Link to="/register">¿No tienes una cuenta? Registrate</Link>
               </div>
 
               <div>
@@ -294,7 +294,7 @@ const Login = () => {
                       aria-hidden="true"
                     />
                   </span>
-                  Sign in
+                  Iniciar Sesion
                 </button>
               </div>
             </form>

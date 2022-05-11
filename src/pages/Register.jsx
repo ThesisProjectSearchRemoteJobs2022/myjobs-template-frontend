@@ -153,10 +153,10 @@ const Register = () => {
               <div className="md:col-span-1">
                 <div className="px-4 mt-5">
                   <h3 className="text-lg font-medium leading-6 text-gray-900">
-                    Personal Information
+                    Informacion Personal
                   </h3>
                   <p className="mt-1 text-sm text-gray-600">
-                    Use a permanent address where you can receive mail.
+                  Use una dirección gmail donde pueda recibir correos.
                   </p>
                 </div>
               </div>
@@ -199,7 +199,7 @@ const Register = () => {
                             htmlFor="firstname"
                             className="block text-sm font-medium text-gray-700"
                           >
-                            First name
+                            Nombre
                           </label>
                           <input
                             type="text"
@@ -220,7 +220,7 @@ const Register = () => {
                             htmlFor="lastname"
                             className="block text-sm font-medium text-gray-700"
                           >
-                            Last name
+                            Apellido
                           </label>
                           <input
                             type="text"
@@ -237,7 +237,7 @@ const Register = () => {
                             htmlFor="email"
                             className="block text-sm font-medium text-gray-700"
                           >
-                            Email address
+                            Correo Gmail
                           </label>
                           <input
                             type="email"
@@ -254,7 +254,7 @@ const Register = () => {
                             htmlFor="password"
                             className="block text-sm font-medium text-gray-700"
                           >
-                            Password
+                            Contraseña
                           </label>
                           <input
                             type="password"
@@ -338,13 +338,13 @@ const Register = () => {
                     </div>
                     <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                       <Link className=" py-2 px-4" to="/login">
-                        {"Already have an account? Sign in"}
+                        {"¿Ya tienes una cuenta? Inicia Sesion"}
                       </Link>
                       <button
                         type="submit"
                         className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       >
-                        Save
+                        Registrarme
                       </button>
                     </div>
                   </div>
