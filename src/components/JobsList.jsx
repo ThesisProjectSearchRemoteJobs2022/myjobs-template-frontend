@@ -15,7 +15,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const JobsList = () => {
   const [{ user }, dispatch] = useStateValue()
   const [jobs, setJobs] = useState([]);
-  const [jobSearch, setJobSearch] = useState(['Desarrollador Web']);
+  const [jobSearch, setJobSearch] = useState('Desarrollador Web');
 
   
   const [hasJobs, setHasJobs] = useState(false)
@@ -99,6 +99,7 @@ const JobsList = () => {
         console.log("Ingrese el empleo a buscar");
         return;
       }
+      console.log("Empleo: ",jobSearch)
       if (!usuariObj) {
         console.log("Primero inicie sesion");
         // return

@@ -94,11 +94,12 @@ const Register = () => {
       console.log(JSON.stringify(response));
       
       if(response.error){
-        
+        setSuccess(false)
         setErrMsg(response.error.message);
         return
       }
       if (response.data?.success === false) {
+        setSuccess(false)
         console.log("FALSE user exists");
         let errorUserAlreadyExist = response.data?.response;
         setErrMsg(errorUserAlreadyExist);
@@ -108,6 +109,7 @@ const Register = () => {
 
       if (response.data?.success === "falseVAL") {
         console.log("FALSE ERROR");
+        setSuccess(false)
         let errorDetalles = response.data?.response;
         let errorMessage = "";
         errorMessage= errorDetalles.map((errorMsg,i) => {
@@ -120,7 +122,7 @@ const Register = () => {
         return;
       }
       
-      setErrMsg("");
+      //setErrMsg("");
       setPwd("");
       setSuccess(true);
       
