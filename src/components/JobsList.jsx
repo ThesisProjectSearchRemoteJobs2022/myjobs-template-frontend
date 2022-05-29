@@ -334,6 +334,7 @@ const JobsList = () => {
           <div className="hero ">
             <div className="box pt-6">
               <div className="box-wrapper">
+                
                 <div className="bg-white rounded flex items-center w-full p-3 shadow-sm border border-gray-200">
                   {/* stroke-linecap="round" stroke-linejoin="round" */}
                   <button
