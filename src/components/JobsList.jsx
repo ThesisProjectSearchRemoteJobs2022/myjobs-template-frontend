@@ -11,13 +11,17 @@ import {KeyIcon, MailIcon } from '@heroicons/react/outline';
 // import lista from "../data/information";
 // import lista from "../data/information";
 import toast, { Toaster } from 'react-hot-toast';
+import Skeleton from "./Skeleton";
+import Intro from "./Intro";
 
 const JobsList = () => {
   const [{ user }, dispatch] = useStateValue()
-  const [jobs, setJobs] = useState([]);
+  const [jobs, setJobs] = useState();
   const [jobSearch, setJobSearch] = useState('Desarrollador Web');
 
-  
+  const [isLoading, setIsLoading] = useState(false);
+  const [isVentaInicial, setVentanaInicial] = useState(false);
+
   const [hasJobs, setHasJobs] = useState(false)
 
   const cancelButtonRef = useRef(null)
@@ -32,9 +36,16 @@ const JobsList = () => {
       url: `getJobs?trabajo=${jobSearchArg}`,
     }).then((data) => {
       console.log(data);
-      setJobs(data.jobs); 
 
+      setJobs(data.jobs); 
+      setIsLoading(false);
       setHasJobs(data.success);
+      // setTimeout(() => {
+      
+      // }, 3000);
+    
+
+    
     }).catch(error=>{
       console.log("error",error.message)
     });
@@ -42,13 +53,18 @@ const JobsList = () => {
   };
 
   const handle = (e)=>{
+    
     const ofertVa = e.target.value
     setJobSearch(ofertVa)
     console.log(ofertVa)
   }
   const submit = ()=>{
+    setIsLoading(true);
+    setVentanaInicial(true);
     
+    setJobs([]); 
     // const ofertVa = e.target.value
+    
     getJobsList()
     // console.log("submit:",ofertVa)
     
@@ -170,10 +186,7 @@ const JobsList = () => {
                 </button>
           </form> */}
 
-          <Toaster
-            position="bottom-center"
-            reverseOrder={true}
-          />
+          <Toaster position="bottom-center" reverseOrder={true} />
 
           <Transition.Root show={openDialog2} as={Fragment}>
             <Dialog
@@ -229,17 +242,14 @@ const JobsList = () => {
                           </Dialog.Title>
                           <div className="mt-2 flex ">
                             <p className="text-sm text-gray-500 w-full">
-                              Para recibir Recibir Correos requiere iniciar sesion.
+                              Para recibir Recibir Correos requiere iniciar
+                              sesion.
                             </p>
                           </div>
-                          
                         </div>
                       </div>
                     </div>
-                    <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    
-                  
-                    </div>
+                    <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"></div>
                   </div>
                 </Transition.Child>
               </div>
@@ -296,11 +306,10 @@ const JobsList = () => {
                             as="h3"
                             className="text-lg leading-6 font-medium text-gray-900"
                           >
-                              Subcripcion a recibir correos electronico
+                            Subcripcion a recibir correos electronico
                           </Dialog.Title>
                           <div className="mt-2 flex ">
                             <p className="text-sm text-gray-500 w-full">
-                              
                               Recibira notificaciones de
                             </p>
                           </div>
@@ -334,7 +343,6 @@ const JobsList = () => {
           <div className="hero ">
             <div className="box pt-6">
               <div className="box-wrapper">
-                
                 <div className="bg-white rounded flex items-center w-full p-3 shadow-sm border border-gray-200">
                   {/* stroke-linecap="round" stroke-linejoin="round" */}
                   <button
@@ -395,22 +403,32 @@ const JobsList = () => {
         </div>
       </div>
       {/* <Header /> */}
+
       <div className="px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto">
         <div className="lg:text-2xl md:text-xl text-lg lg:p-3 p-1 font-black text-gray-700">
           resultados de
           <span> {jobSearch == "" ? "desarrollador" : jobSearch}</span>
+
+          
         </div>
       </div>
-
-      <div className="grid p-16 justify-center items-center text-gray-900">
-        {jobs.map((job, index) => (
-          // <p key={index}>{job.company}</p>
-          // <Cards key={index} info={job} indice={index} />
-
-          <JobCard job={job} key={index} />
-        ))}
+      {!isVentaInicial &&  <Intro />}
+        
+      <div className="grid lg:grid-cols-1 p-16 justify-center items-center text-gray-900">
+        
+        {isLoading && [1, 2,3,4,5].map((_, idx) => <Skeleton key={idx} />)}
+        {
+          //jobSearch
+          jobs && jobs.map((job, index) => (
+              // <p key={index}>{job.company}</p>
+              // <Cards key={index} info={job} indice={index} />
+              <JobCard key={index} job={job} />
+            ))
+        }
       </div>
+    
     </div>
+    
   );
 };
 

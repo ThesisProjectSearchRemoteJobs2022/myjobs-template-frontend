@@ -247,8 +247,11 @@ const Register = () => {
                             id="email"
                             autoComplete="email"
                             required
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            className="peer mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                           />
+                          <p class="mt-2 invisible peer-invalid:visible text-pink-600 text-sm">
+                            Ingrese un correo valido.
+                          </p>
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">

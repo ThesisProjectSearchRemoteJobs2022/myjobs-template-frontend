@@ -1,4 +1,5 @@
 import React from 'react'
+
 // import Details from './Details'
 // import Image from './Image'
 
@@ -14,7 +15,7 @@ function JobCard({job}) {
     // const rules = `bg-white max-w-4xl mb-10 shadow-lg p-4 flex justify-center items-center`
     return (
 
-        <div className="max-w-4xl px-10 my-4 py-6 bg-white rounded-lg shadow-md">
+        <div className="max-w-4xl mx-auto px-10 my-4 py-6 bg-white rounded-lg shadow-md center">
             <div className="flex justify-between items-center">
                 <span className="font-light text-gray-600">{job.date}</span>
                 <span className="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" >{job.salary}</span>
@@ -32,8 +33,13 @@ function JobCard({job}) {
                     </div>
                 </div>
             </div>
+
+            
         </div>
-    )
+
+        
+            )
+
 }
 
 
