@@ -120,7 +120,7 @@ const Login = () => {
       console.log(JSON.stringify(response));
       if(response.error){
         setSuccess(false)
-        setErrMsg("Network Error");
+        setErrMsg("Error de conexión");
         return
       }
       if (response.data?.success==false) {
@@ -232,7 +232,7 @@ const Login = () => {
                   <input
                     type="email"
                     id="username"
-                    placeholder="youremail@gmail.com"
+                    placeholder="tucorreo@gmail.com"
                     ref={userRef}
                     autoComplete="off"
                     onChange={(e) => setUser(e.target.value)}
@@ -246,7 +246,7 @@ const Login = () => {
                   <label htmlFor="password">Contraseña:</label>
                   <input
                     type="password"
-                    placeholder="password"
+                    placeholder="contraseña"
                     id="password"
                     onChange={(e) => setPwd(e.target.value)}
                     value={pwd}

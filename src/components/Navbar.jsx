@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { BellIcon, MenuIcon, UserIcon, XIcon } from '@heroicons/react/outline'
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
@@ -274,15 +274,16 @@ function Navbar() {
                     <Menu as="div" className="ml-3 relative">
                     {/* https://cdn-icons-png.flaticon.com/512/64/64572.png */}
                       <div>
-                        <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <Menu.Button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                           <span className="sr-only">Open user menu</span>
                           {!user ? (
                             <>
-                              <img
+                            <UserIcon class="h-5 w-5" aria-hidden="true" />
+                              {/* <img
                                 className="h-8 w-8 rounded-full"
                                 src="https://cdn-icons-png.flaticon.com/512/64/64572.png"
                                 alt=""
-                              />
+                              /> */}
                             </>):(
                             <>
                               <img

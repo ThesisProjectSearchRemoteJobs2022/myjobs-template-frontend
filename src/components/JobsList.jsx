@@ -47,7 +47,10 @@ const JobsList = () => {
 
     
     }).catch(error=>{
-      console.log("error",error.message)
+    showHotToastMessage(true,error.message)
+      console.log("error: ",error.message)
+      setIsLoading(false);
+      
     });
 
   };
@@ -350,7 +353,7 @@ const JobsList = () => {
                     className="mx-3 flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
                   >
                     <svg
-                      className="text-white w-5 text-gray-600 h-5 cursor-pointer"
+                      className="text-white w-5 text-white-600 h-5 cursor-pointer"
                       fill="none"
                       strokeWidth="2"
                       stroke="currentColor"
@@ -365,7 +368,7 @@ const JobsList = () => {
                     type="search"
                     name="jobSearch"
                     id="jobSearch"
-                    placeholder="search for images"
+                    placeholder="Buscar empleos"
                     x-model="q"
                     className="w-full pl-4 text-sm outline-none focus:outline-none bg-transparent"
                   />
