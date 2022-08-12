@@ -124,7 +124,7 @@ function Navbar() {
       useValidarToken(token).then((response) => {
         console.log("response Welcome Back: ", response);
         //TODO WELCOM BACK USER signInToken
-        if (response.data.success) {
+        if (response.data?.success) {
           dispatch({
             type: actionType.USER,
             user: response.data,
@@ -278,7 +278,7 @@ function Navbar() {
                           <span className="sr-only">Open user menu</span>
                           {!user ? (
                             <>
-                            <UserIcon class="h-5 w-5" aria-hidden="true" />
+                            <UserIcon className="h-5 w-5" aria-hidden="true" />
                               {/* <img
                                 className="h-8 w-8 rounded-full"
                                 src="https://cdn-icons-png.flaticon.com/512/64/64572.png"

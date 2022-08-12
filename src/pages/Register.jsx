@@ -122,7 +122,7 @@ const Register = () => {
         return;
       }
       
-      //setErrMsg("");
+      setErrMsg("");
       setPwd("");
       setSuccess(true);
       
@@ -132,7 +132,7 @@ const Register = () => {
       // setErrMsg("Ocurrio un Error");
       if (!err?.response) {
         console.log("catch error",err)
-        // setErrMsg("Ocurrio un Error");
+        setErrMsg("Ocurrio un Error");
       }
         // errRef.current.focus();
       

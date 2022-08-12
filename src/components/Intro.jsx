@@ -13,7 +13,7 @@ const Intro = () => {
       <div className="relative flex flex-col overflow-hidden bg-white py-6 sm:py-12">
       <div className="mx-auto max-w-4xl rounded-3xl bg-[#092540] p-20 text-center">
          <h2 className="text-5xl font-bold leading-tight text-white">Portal de Empleos TI & Desarrollo</h2>
-         <p className="mt-5 text-xl leading-8 text-white"> Obtenga empleos rapido y recibalo en su correo</p>
+         <p className="mt-5 text-xl leading-8 text-white"> Busca empleos y le enviaremos a correo</p>
          <div className="mt-6 flex items-center justify-center gap-4">
             
          </div>

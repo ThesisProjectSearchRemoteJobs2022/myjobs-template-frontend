@@ -13,25 +13,25 @@ import React from 'react'
 
 function JobCard({job}) {
     // const rules = `bg-white max-w-4xl mb-10 shadow-lg p-4 flex justify-center items-center`    
-    const hasSalary= job.salary.includes("null")
-    const salary = !hasSalary? job.salary:"-"
+    const hasSalary= job?.salary?.includes("null")
+    const salary = !hasSalary? job?.salary:"-"
     return (
     
         <div className="max-w-4xl mx-auto px-10 my-4 py-6 bg-white rounded-lg shadow-md center">
             <div className="flex justify-between items-center">
-                <span className="font-light text-gray-600">{job.date}</span>
+                <span className="font-light text-gray-600">{job?.date}</span>
                 <span className="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" >{salary}</span>
             </div>
             <div className="mt-2">
-                <span className="text-2xl text-gray-700 font-bold hover:text-gray-600" >{job.title}</span>
-                <p className="mt-2 text-gray-600">{job.content}</p>
+                <span className="text-2xl text-gray-700 font-bold hover:text-gray-600" >{job?.title}</span>
+                <p className="mt-2 text-gray-600">{job?.content}</p>
             </div>
             <div className="flex justify-between items-center mt-4">
-                <a className="text-blue-600 hover:underline" rel="noopener" target='_blank' href={`${job.link}`}>Details</a>
+                <a className="text-blue-600 hover:underline" rel="noopener" target='_blank' href={`${job?.link}`}>Details</a>
                 <div>
                     <div className="flex items-center" href="#">
-                        <img className="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src={`${job.image}`} alt="avatar" />
-                        <h1 className="text-gray-700 font-bold">{job.company}</h1>
+                        <img className="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src={`${job?.image}`} alt="avatar" />
+                        <h1 className="text-gray-700 font-bold">{job?.company}</h1>
                     </div>
                 </div>
             </div>

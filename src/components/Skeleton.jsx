@@ -28,16 +28,16 @@ const Skeleton = () => {
 
     <div className="max-w-4xl px-10 my-4 py-6 bg-white rounded-lg shadow-md center mx-auto w-full h-full border-2 ">
       <div className="max-w-4xl flex animate-pulse flex-row items-center h-full justify-center space-x-5">
-        <div class="w-full flex flex-col space-y-3 ">
-          <div class="flex space-x-3 justify-between">
-            <div class="animate-pulse w-1/6 h-3  bg-gray-300 rounded-full"></div>
-            <div class="justify-end animate-pulse w-1/6 h-3  bg-gray-300 rounded-full"></div>
+        <div className="w-full flex flex-col space-y-3 ">
+          <div className="flex space-x-3 justify-between">
+            <div className="animate-pulse w-1/6 h-3  bg-gray-300 rounded-full"></div>
+            <div className="justify-end animate-pulse w-1/6 h-3  bg-gray-300 rounded-full"></div>
           </div>
-          <div class="w-full bg-gray-300 h-6 rounded-md bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
-          <div class="w-full bg-gray-300 h-6 bg-gray-300 rounded-full"></div>
-          <div class="flex space-x-4 align-center items-center justify-between">
-            <div class="animate-pulse w-1/5 h-3 bg-gray-300 rounded-full"></div>
-            <div class="w-8 bg-gray-300 h-8 bg-gray-300 rounded-full"></div>
+          <div className="w-full bg-gray-300 h-6 rounded-md bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+          <div className="w-full bg-gray-300 h-6 bg-gray-300 rounded-full"></div>
+          <div className="flex space-x-4 align-center items-center justify-between">
+            <div className="animate-pulse w-1/5 h-3 bg-gray-300 rounded-full"></div>
+            <div className="w-8 bg-gray-300 h-8 bg-gray-300 rounded-full"></div>
           </div>
         </div>
         
